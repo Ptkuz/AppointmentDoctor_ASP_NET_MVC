@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "DXIMbFe2pOC2c8Ce4H6sum0YbDVX55OWcMJSfzXeTI4=",
+  "Source": "DoctorsAppointments",
+  "BasePath": "_content/DoctorsAppointments",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "DoctorsAppointments\\wwwroot",
+      "Source": "DoctorsAppointments",
+      "ContentRoot": "C:\\Users\\ptkuz\\source\\repos\\DoctorsAppointments\\DoctorsAppointments\\wwwroot\\",
+      "BasePath": "_content/DoctorsAppointments",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}

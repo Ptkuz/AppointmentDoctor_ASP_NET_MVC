@@ -1,0 +1,54 @@
+﻿@using DoctorsAppointments.Models.DataBase
+@model Appointment
+@{
+    ViewBag.Title = "Добавление записи на прием к врачу";
+
+
+}
+@using(Html.BeginForm())
+{
+    <fieldset>
+        <legend>Запись на прием к врачу</legend>
+        <p>
+            Пациент <br/>
+            @Html.DropDownListFor(model => model.IdPatient, ViewBag.Patients as SelectList)    
+        </p>
+       <p>
+            Доктор <br/>
+            @Html.DropDownListFor(model => model.IdDoctor, ViewBag.Doctors as SelectList)    
+        </p>
+        
+        <p>
+            Дата: <br/>
+            <input type="date" id="DateAppointment" name="DateAppointment"/>
+        </p>
+        <p>
+            Время: <br/>
+           <select data-val="true" data-val-required="The TimeAppointment field is required." id="TimeAppointment" name="TimeAppointment">
+	            <option selected="selected" value="0">10:00</option>
+	            <option value="1">10:30</option>
+	            <option value="2">11:00</option>
+	            <option value="3">11:30</option>
+	            <option value="4">12:00</option>
+	            <option value="5">12:30</option>
+	            <option value="6">13:00</option>
+	            <option value="7">13:30</option>
+	            <option value="8">14:00</option>
+	            <option value="9">14:30</option>
+                <option value="10">15:00</option>
+                <option value="11">15:30</option>
+                <option value="12">16:00</option>
+                <option value="13">16:30</option>
+</select>
+        </p>
+        <p>
+            <input type="submit" value="Записаться на прием" />
+        </p>
+        <div>
+            <a href="/Admin/Home/Index">Меню администратора</a>
+            @Html.ActionLink("Главная страница", "Index", "Home")
+        </div>
+
+    </fieldset>
+
+}

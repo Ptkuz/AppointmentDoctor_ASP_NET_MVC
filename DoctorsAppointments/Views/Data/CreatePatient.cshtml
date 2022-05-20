@@ -1,0 +1,54 @@
+﻿@using DoctorsAppointments.Models.DataBase
+@model Patient
+@{
+    ViewBag.Title = "Добавление пациента";
+
+
+}
+@using(Html.BeginForm())
+{
+    <fieldset>
+        <legend>Пациент</legend>
+        <p>
+            Имя пациента <br/>
+            @Html.EditorFor(model => model.FirstName)     
+        </p>
+        <p>
+            Отчество пациента <br/>
+            @Html.EditorFor(model => model.Patronymic)     
+        </p>
+        <p>
+            Фамилия пациента <br/>
+            @Html.EditorFor(model => model.LastName)     
+        </p>
+       <p>
+            Дата рождения пациента: <br/>
+            <input type="date" id="DateAge" name="DateAge"/>
+        </p>
+        <p>
+            Пол пациента <br/>
+            @Html.DropDownListFor(model => model.Gender, ViewBag.Genders as SelectList)    
+        </p>
+        <p>
+            Серия номер паспорта <br/>
+            @Html.EditorFor(model => model.Passport)     
+        </p>
+        <p>
+            Полис <br/>
+            @Html.EditorFor(model => model.Polis)     
+        </p>
+        <p>
+            Снилс <br/>
+            @Html.EditorFor(model => model.Snils)     
+        </p>
+        <p>
+            <input type="submit" value="Добавить пациента" />
+        </p>
+        <div>
+            <a href="/Admin/Home/Index">Меню администратора</a>
+            @Html.ActionLink("Главная страница", "Index", "Home")
+        </div>
+
+    </fieldset>
+
+}

@@ -1,0 +1,32 @@
+﻿@using DoctorsAppointments.Models.DataBase
+@model Profile
+@{
+    ViewBag.Title = "Добавление нового профиля";
+
+
+}
+@using(Html.BeginForm())
+{
+    <fieldset>
+        <legend>Профиль</legend>
+        <p>
+            Название профиля <br/>
+            @Html.EditorFor(model => model.Name)     
+        </p>
+        <p>
+            Описание профиля <br/>
+            @Html.TextAreaFor(model => model.Description)     
+        </p>
+        <p>
+            <input type="submit" value="Добавить профиль" />
+        </p>
+        <div>
+            <a href="/Admin/Home/Index">Меню администратора</a>
+            @Html.ActionLink("Главная страница", "Index", "Home")
+            
+
+        </div>
+
+    </fieldset>
+
+}
