@@ -1,11 +1,99 @@
 ﻿@using DoctorsAppointments.Models
 @model IndexViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, DoctorsAppointments
+
+@ViewBag.Title Просмотр докторов
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+td, th {padding: 0 13px 0 0;}
+ 
+.glyphicon{
+    border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  margin: 0 5px;
+}
+.glyphicon-chevron-down {
+    transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+  
+.glyphicon-chevron-up {
+    transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+</style>
+
 
 <h2>Список докторов</h2>
-<p><a asp-action="CreateDoctor">Добавить доктора</a></p>
+
+<form method="get">
+    <label>Поиск: </label>
+    <input name="name" value="@Model.FilterViewModel.SelectedName"/>
+
+    <label>Профиль</label>
+    <select name="profile" asp-items="Model.FilterViewModel.Profiles"></select>
+
+    <input type="submit" value="Поиск"/>
+
+</form>
+
+
+<p><a asp-action="CreateDoctor" asp-controller="Data">Добавить доктора</a></p>
 <table class="table">
-    <tr><th>Имя</th><th>Отчество</th><th>Фамилия</th><th>Дата рождения</th><th>Профиль</th><th>Опыт</th></tr>
+    <tr><th>
+        <a asp-action="ViewDoctors"
+               asp-route-sortOrder="@(Model.SortDoctorsViewModel.FirstNameSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-company="@(Model.FilterViewModel.SelectedProfile)">
+        Имя
+        </a>
+        </th>
+        <th>
+            <a asp-action="ViewDoctors"
+               asp-route-sortOrder="@(Model.SortDoctorsViewModel.PatronymicSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-company="@(Model.FilterViewModel.SelectedProfile)">
+            Отчество
+            </a>
+            </th>
+            <th>
+                <a asp-action="ViewDoctors"
+               asp-route-sortOrder="@(Model.SortDoctorsViewModel.LastNameSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-company="@(Model.FilterViewModel.SelectedProfile)">
+                Фамилия
+                 </a>
+                </th>
+                <th>
+                     <a asp-action="ViewDoctors"
+               asp-route-sortOrder="@(Model.SortDoctorsViewModel.DateAgeSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-company="@(Model.FilterViewModel.SelectedProfile)">
+                    Дата рождения
+                     </a>
+                    </th>
+                    <th>
+                         <a asp-action="ViewDoctors"
+               asp-route-sortOrder="@(Model.SortDoctorsViewModel.ProfileNameSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-company="@(Model.FilterViewModel.SelectedProfile)">
+                        Профиль
+                        </a>
+                    </th>
+                    <th>
+                         <a asp-action="ViewDoctors"
+               asp-route-sortOrder="@(Model.SortDoctorsViewModel.ExperienceSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-company="@(Model.FilterViewModel.SelectedProfile)">
+                        Опыт
+                          </a>
+                        </th>
+                        </tr>
     @foreach(var item in Model.Doctors)
     {
         <tr>
@@ -13,7 +101,7 @@
             <td>@item.Patronymic</td>
             <td>@item.LastName</td>
             <td>@item.DateAge.ToShortDateString()</td>
-            <td>@item.Profile.Name</td>
+            <td>@item.Profile?.Name</td>
             <td>@item.Experience</td>
             <td>
                 <a asp-action="EditDoctor" asp-controller="Data" asp-route-id="@item.Id">Изменить</a>
@@ -27,18 +115,7 @@
     }
 </table>
 
-<p>
-    @if (Model.PageViewModel.HasPreviousPage)
-    {
-        <a asp-action="ViewDoctors" asp-route-page="@(Model.PageViewModel.PageNumber - 1)" class="glyphicon glyphicon-chevron-left">
-            Назад
-        </a>        
-    }
-    @if (Model.PageViewModel.HasNextPage)
-{
-    <a asp-action="ViewDoctors"
-       asp-route-page="@(Model.PageViewModel.PageNumber + 1)" class="glyphicon glyphicon-chevron-right">
-        Вперед
-    </a>
-}
-</p>
+<page-link page-model="Model.PageViewModel" page-action="ViewDoctors"
+           page-url-name="@(Model.FilterViewModel.SelectedName)"
+           page-url-company="@(Model.FilterViewModel.SelectedProfile)"
+           page-url-sortorder="@(Model.SortDoctorsViewModel.Current)"></page-link>

@@ -34,7 +34,7 @@ namespace DoctorsAppointments.Controllers
         {
             db.Doctors.Add(doctor);
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ViewDoctors", "Home");
 
         }
 
@@ -46,7 +46,7 @@ namespace DoctorsAppointments.Controllers
         {
             db.Profiles.Add(profile);
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ViewProfiles", "Home");
 
         }
 
@@ -67,7 +67,7 @@ namespace DoctorsAppointments.Controllers
         {
             db.Patients.Add(patient);
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ViewPatients", "Home");
         }
 
 
@@ -104,7 +104,7 @@ namespace DoctorsAppointments.Controllers
         {
             db.Appointments.Add(appointment);
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ViewAppointments", "Home");
 
         }
 
@@ -146,6 +146,100 @@ namespace DoctorsAppointments.Controllers
             db.Doctors.Update(doctor);
             await db.SaveChangesAsync();
             return RedirectToAction("ViewDoctors", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePatient(Guid? id)
+        {
+            if (id != null)
+            {
+                Patient? patient = new Patient { Id = id.Value };
+                db.Entry(patient).State = EntityState.Deleted;
+                await db.SaveChangesAsync();
+                return RedirectToAction("ViewPatients", "Home");
+            }
+            return NotFound();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditPatient(Guid? id)
+        {
+            if (id != null)
+            {
+                string[] massGenders = new string[] { "Мужской", "Женский" };
+
+                SelectList genders = new SelectList(massGenders);
+                ViewBag.Genders = genders;
+
+                Patient? patient = await db.Patients.FirstOrDefaultAsync(p => p.Id == id);
+                if (patient != null)
+                {
+                    return View(patient);
+                }
+
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditPatient(Patient patient)
+        {
+
+
+            db.Patients.Update(patient);
+            await db.SaveChangesAsync();
+            return RedirectToAction("ViewPatients", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteProfile(Guid? id)
+        {
+            if (id != null)
+            {
+                Profile? profile = new Profile { Id = id.Value };
+                db.Entry(profile).State = EntityState.Deleted;
+                await db.SaveChangesAsync();
+                return RedirectToAction("ViewProfile", "Home");
+            }
+            return NotFound();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditProfile(Guid? id)
+        {
+            if (id != null)
+            {
+                Profile? profile = await db.Profiles.FirstOrDefaultAsync(p => p.Id == id);
+                if (profile != null)
+                {
+                    return View(profile);
+                }
+
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProfile(Profile profile)
+        {
+
+
+            db.Profiles.Update(profile);
+            await db.SaveChangesAsync();
+            return RedirectToAction("ViewProfiles", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAppointment(Guid? id)
+        {
+            if (id != null)
+            {
+                Appointment? appointment = new Appointment { Id = id.Value };
+                db.Entry(appointment).State = EntityState.Deleted;
+                await db.SaveChangesAsync();
+                return RedirectToAction("ViewAppointment", "Home");
+            }
+            return NotFound(); 
         }
     }
 }

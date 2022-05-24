@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "DXIMbFe2pOC2c8Ce4H6sum0YbDVX55OWcMJSfzXeTI4=",
+  "Hash": "1Xsx5bLRrrAdktrj1keW7IzZRB+527lrLm6vZQGcLQc=",
   "Source": "DoctorsAppointments",
   "BasePath": "_content/DoctorsAppointments",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "DoctorsAppointments\\wwwroot",
       "Source": "DoctorsAppointments",
-      "ContentRoot": "C:\\Users\\ptkuz\\source\\repos\\DoctorsAppointments\\DoctorsAppointments\\wwwroot\\",
+      "ContentRoot": "G:\\Загрузки\\DoctorsAppointments\\DoctorsAppointments\\DoctorsAppointments\\wwwroot\\",
       "BasePath": "_content/DoctorsAppointments",
       "Pattern": "**"
     }

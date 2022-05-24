@@ -1,5 +1,6 @@
 ﻿@using DoctorsAppointments.Models.DataBase
 @model Appointment
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewBag.Title = "Добавление записи на прием к врачу";
 
@@ -11,11 +12,11 @@
         <legend>Запись на прием к врачу</legend>
         <p>
             Пациент <br/>
-            @Html.DropDownListFor(model => model.IdPatient, ViewBag.Patients as SelectList)    
+            @Html.DropDownListFor(model => model.PatientId, ViewBag.Patients as SelectList)    
         </p>
        <p>
             Доктор <br/>
-            @Html.DropDownListFor(model => model.IdDoctor, ViewBag.Doctors as SelectList)    
+            @Html.DropDownListFor(model => model.DoctorId, ViewBag.Doctors as SelectList)    
         </p>
         
         <p>
@@ -44,10 +45,6 @@
         <p>
             <input type="submit" value="Записаться на прием" />
         </p>
-        <div>
-            <a href="/Admin/Home/Index">Меню администратора</a>
-            @Html.ActionLink("Главная страница", "Index", "Home")
-        </div>
 
     </fieldset>
 

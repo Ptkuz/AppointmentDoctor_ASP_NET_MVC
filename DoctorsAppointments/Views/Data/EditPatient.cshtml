@@ -1,0 +1,44 @@
+﻿@using DoctorsAppointments.Models.DataBase
+@model Patient
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h2>Редактирование пациента</h2>
+<form asp-action="EditPatient" asp-controller="Data" asp-route-id="@Model.Id">
+    <p>
+        <label asp-for="FirstName">Имя</label>
+        <input type="text" asp-for="FirstName"/>
+    </p>
+    <p>
+        <label asp-for="Patronymic">Отчество</label>
+        <input type="text" asp-for="Patronymic"/>
+    </p>
+    <p>
+        <label asp-for="LastName">Фамилия</label>
+        <input type="text" asp-for="LastName"/>
+    </p>
+     <p>
+        <label asp-for="DateAge">Дата рождения</label>
+        <input type="date" asp-for="DateAge"/>
+    </p>
+     <p>
+            Пол пациента <br/>
+            @Html.DropDownListFor(model => model.Gender, ViewBag.Genders as SelectList)    
+        </p>
+    <p>
+        <label asp-for="Passport">Серия и номер паспорта</label>
+        <input type="text" asp-for="Passport"/>
+    </p>
+    <p>
+        <label asp-for="Polis">Номер полиса</label>
+        <input type="text" asp-for="Polis"/>
+    </p>
+    <p>
+        <label asp-for="Snils">СНИЛС</label>
+        <input type="text" asp-for="Snils"/>
+    </p>
+    <p>
+        <input type="submit" value="Изменить" />
+    </p>
+
+
+</form>

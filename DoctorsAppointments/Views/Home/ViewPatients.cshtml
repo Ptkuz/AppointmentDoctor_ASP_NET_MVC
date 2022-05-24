@@ -1,0 +1,50 @@
+﻿@using DoctorsAppointments.Models
+@model IndexViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewBag.Title = "Просмотр пациентов";
+}
+
+<h2>Список пациентов</h2>
+<p><a asp-action="CreatePatient" asp-controller="Data">Добавить пациента</a></p>
+<table class="table">
+    <tr><th>Имя</th><th>Отчество</th><th>Фамилия</th><th>Дата рождения</th><th>Пол</th><th>Паспорт</th><th>Полис</th><th>СНИЛС</th><th></th><th></th></tr>
+    @foreach(var item in Model.Patients)
+    {
+        <tr>
+            <td>@item.FirstName</td>
+            <td>@item.Patronymic</td>
+            <td>@item.LastName</td>
+            <td>@item.DateAge.ToShortDateString()</td>
+            <td>@item.Gender</td>
+            <td>@item.Passport</td>
+            <td>@item.Polis</td>
+            <td>@item.Snils</td>
+            <td>
+                <a asp-action="EditPatient" asp-controller="Data" asp-route-id="@item.Id">Изменить</a>
+            </td>
+            <td>
+                 <form asp-controller="Data" asp-action="DeletePatient" method="post"  asp-route-id="@item.Id">
+                    <input type="submit" value="Удалить" />
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+<p>
+    @if (Model.PageViewModel.HasPreviousPage)
+    {
+        <a asp-action="ViewPatients" asp-route-page="@(Model.PageViewModel.PageNumber - 1)" class="glyphicon glyphicon-chevron-left">
+            Назад
+        </a>        
+    }
+    @if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="ViewPatients"a
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)" class="glyphicon glyphicon-chevron-right">
+        Вперед
+    </a>
+}
+</p>
