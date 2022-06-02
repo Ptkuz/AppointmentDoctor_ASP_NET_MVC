@@ -1,15 +1,93 @@
-﻿@using DoctorsAppointments.Models
+﻿@using DoctorsAppointments.Models.ViewModels
+@using DoctorsAppointments.Models.DataBase
+@using DoctorsAppointments
+@using System.ComponentModel.DataAnnotations;
 @model IndexViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, DoctorsAppointments
 
 @{
     ViewBag.Title = "Просмотр записей";
+    
+   
 }
 
+
+
 <h2>Список всех записей к врачам</h2>
-<p><a asp-action="CreateAppointment" asp-controller="Data">Добавить запись к врачу</a></p>
+
+<form method="get">
+    <label>Поиск: </label>
+    <input name="name" value="@Model.FilterViewModel.SelectedName"/>
+    <input type="submit" name="search" value="Поиск"/>
+
+</form>
+<a asp-action="Index" asp-controller="Home">Главная страница</a>
+ @if(Model.User?.RoleId == 1)
+            {
+                <a asp-action="CreateAppointment" asp-controller="Data">Добавить запись к врачу</a>
+            }
+            
+
+            
+
 <table class="table">
-    <tr><th>Имя пациента</th><th>Отчество пациента</th><th>Фамилия пациента</th><th>Полис</th><th>Имя доктора</th><th>Отчество доктора</th><th>Фамилия доктора</th><th>Профиль</th><th>Дата записи</th><th>Время записи</th><th></th></tr>
+    <tr><th>
+        <a asp-action="ViewAppointments"
+               asp-route-sortOrder="@(Model.SortAppointmentsViewModel.PatientFirstName)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)">
+        Имя пациента
+        </a>
+        </th><th>
+            <a asp-action="ViewAppointments"
+               asp-route-sortOrder="@(Model.SortAppointmentsViewModel.PatientPatronymic)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)">
+        Отчество пациента
+        </a>
+            </th><th>
+                <a asp-action="ViewAppointments"
+               asp-route-sortOrder="@(Model.SortAppointmentsViewModel.PatientLastName)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)">
+        Фамилия пациента
+        </a>
+                </th><th>
+                   <a asp-action="ViewAppointments"
+               asp-route-sortOrder="@(Model.SortAppointmentsViewModel.PatientPolis)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)">
+       Полис
+        </a>
+                    </th><th>
+                    <a asp-action="ViewAppointments"
+               asp-route-sortOrder="@(Model.SortAppointmentsViewModel.DoctorFirstName)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)">
+        Имя доктора
+        </a>
+                    </th><th>
+                        <a asp-action="ViewAppointments"
+               asp-route-sortOrder="@(Model.SortAppointmentsViewModel.DoctorPatronymic)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)">
+        Отчество доктора
+        </a>
+                        </th><th>
+                           <a asp-action="ViewAppointments"
+               asp-route-sortOrder="@(Model.SortAppointmentsViewModel.DoctorLastName)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)">
+        Фамилия доктора
+        </a>
+                            </th><th>
+                               <a asp-action="ViewAppointments"
+               asp-route-sortOrder="@(Model.SortAppointmentsViewModel.DoctorProfileName)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)">
+        Профиль
+        </a>
+
+                                </th><th>
+                                    <a asp-action="ViewAppointments"
+               asp-route-sortOrder="@(Model.SortAppointmentsViewModel.DateAppointment)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)">
+        Дата записи
+        </a>
+                                    </th><th>Время записи</th><th></th></tr>
     @foreach(var item in Model.Appointments)
     {
         <tr>
@@ -22,28 +100,16 @@
             <td>@item.Doctor.LastName</td>
             <td>@item.Doctor.Profile.Name</td>
             <td>@item.DateAppointment.ToShortDateString()</td>
-            <td>@item.TimeAppointment</td>
+            <td>@Html.DisplayFor(modelItem => item.TimeAppointment.GetAttribute<DisplayAttribute>().Name)
             <td>
                  <form asp-controller="Data" asp-action="DeleteAppointment" method="post"  asp-route-id="@item.Id">
-                    <input type="submit" value="Удалить" />
+                    <input type="submit" name="delete" value="Удалить" />
                 </form>
             </td>
         </tr>
     }
 </table>
 
-<p>
-    @if (Model.PageViewModel.HasPreviousPage)
-    {
-        <a asp-action="ViewAppointments" asp-route-page="@(Model.PageViewModel.PageNumber - 1)" class="glyphicon glyphicon-chevron-left">
-            Назад
-        </a>        
-    }
-    @if (Model.PageViewModel.HasNextPage)
-{
-    <a asp-action="ViewAppointments"
-       asp-route-page="@(Model.PageViewModel.PageNumber + 1)" class="glyphicon glyphicon-chevron-right">
-        Вперед
-    </a>
-}
-</p>
+<page-link page-model="Model.PageViewModel" page-action="ViewAppointments"
+           page-url-name="@(Model.FilterViewModel.SelectedName)"
+           page-url-sortorder="@(Model.SortAppointmentsViewModel.Current)"></page-link>

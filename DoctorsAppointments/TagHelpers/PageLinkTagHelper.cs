@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using DoctorsAppointments.Models;
+using DoctorsAppointments.Models.ViewModels;
+using DoctorsAppointments.Models.ViewModels.SortsViewModels;
 
 namespace DoctorsAppointments.TagHelpers
 {
@@ -42,6 +43,11 @@ namespace DoctorsAppointments.TagHelpers
                 tag.InnerHtml.AppendHtml(prevItem);
                
             }
+            //if (PageModel.HasPreviousPage2) 
+            //{
+            //    TagBuilder prevItem = CreateTag(urlHelper, PageModel.PageNumber - 2);
+            //    tag.InnerHtml.AppendHtml(prevItem);
+            //}
 
             tag.InnerHtml.AppendHtml(currentItem);
             // создаем ссылку на следующую страницу, если она есть
@@ -51,6 +57,12 @@ namespace DoctorsAppointments.TagHelpers
                 tag.InnerHtml.AppendHtml(nextItem);
                 
             }
+            //if (PageModel.HasNextPage2)
+            //{
+            //    TagBuilder nextItem = CreateTag(urlHelper, PageModel.PageNumber + 2);
+            //    tag.InnerHtml.AppendHtml(nextItem);
+
+            //}
             output.Content.AppendHtml(tag);
 
         }

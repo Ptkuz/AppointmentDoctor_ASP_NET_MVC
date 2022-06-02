@@ -1,6 +1,6 @@
 ﻿using DoctorsAppointments.Models.DataBase.Sorts;
 
-namespace DoctorsAppointments.Models
+namespace DoctorsAppointments.Models.ViewModels.SortsViewModels
 {
     public class SortDoctorsViewModel 
     {

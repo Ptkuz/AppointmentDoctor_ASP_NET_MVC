@@ -1,44 +1,59 @@
 ﻿@using DoctorsAppointments.Models.DataBase
+@using System.Web.Mvc.Html
+@using DoctorsAppointments
+@using System.ComponentModel.DataAnnotations;
 @model Patient
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+
+
 <h2>Редактирование пациента</h2>
+<a asp-action="Index" asp-controller="Home">Главная страница</a>
 <form asp-action="EditPatient" asp-controller="Data" asp-route-id="@Model.Id">
     <p>
-        <label asp-for="FirstName">Имя</label>
+        <label asp-for="FirstName">Имя</label><br/>
         <input type="text" asp-for="FirstName"/>
+        <span asp-validation-for="FirstName"/>
     </p>
     <p>
-        <label asp-for="Patronymic">Отчество</label>
+        <label asp-for="Patronymic">Отчество</label><br/>
         <input type="text" asp-for="Patronymic"/>
+        <span asp-validation-for="Patronymic"/>
     </p>
     <p>
-        <label asp-for="LastName">Фамилия</label>
+        <label asp-for="LastName">Фамилия</label><br/>
         <input type="text" asp-for="LastName"/>
+        <span asp-validation-for="LastName"/>
     </p>
      <p>
-        <label asp-for="DateAge">Дата рождения</label>
+        <label asp-for="DateAge">Дата рождения</label><br/>
         <input type="date" asp-for="DateAge"/>
+        <span asp-validation-for="DateAge"/>
     </p>
      <p>
-            Пол пациента <br/>
-            @Html.DropDownListFor(model => model.Gender, ViewBag.Genders as SelectList)    
+            <label asp-for="Genders">Дата рождения</label><br/>
+            @Html.DropDownList("Genders")
+            <span asp-validation-for="Genders"/>
         </p>
     <p>
-        <label asp-for="Passport">Серия и номер паспорта</label>
+        <label asp-for="Passport">Серия и номер паспорта</label><br/>
         <input type="text" asp-for="Passport"/>
+        <span asp-validation-for="Passport"/>
     </p>
     <p>
-        <label asp-for="Polis">Номер полиса</label>
+        <label asp-for="Polis">Номер полиса</label><br/>
         <input type="text" asp-for="Polis"/>
+        <span asp-validation-for="Polis"/>
     </p>
     <p>
-        <label asp-for="Snils">СНИЛС</label>
+        <label asp-for="Snils">СНИЛС</label><br/>
         <input type="text" asp-for="Snils"/>
+        <span asp-validation-for="Snils"/>
     </p>
     <p>
-        <input type="submit" value="Изменить" />
+        <input type="submit" name="butdata" value="Изменить" />
     </p>
 
 
 </form>
+

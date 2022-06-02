@@ -1,26 +1,32 @@
 ﻿@using DoctorsAppointments.Models.DataBase
 @model Profile
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewBag.Title = "Добавление нового профиля";
 
 
 }
+
+
 @using(Html.BeginForm())
 {
     <fieldset>
         <legend>Профиль</legend>
         <p>
-            Название профиля <br/>
-            @Html.EditorFor(model => model.Name)     
+           <label asp-for="Name"></label><br/>
+           <input type="text" asp-for="Name"/>
+           <span asp-validation-for="Name"/>  
         </p>
         <p>
-            Описание профиля <br/>
-            @Html.TextAreaFor(model => model.Description)     
+            <label asp-for="Description"></label><br/>
+            @Html.TextAreaFor(model => model.Description)    
+             <span asp-validation-for="Description"/>
         </p>
         <p>
-            <input type="submit" value="Добавить профиль" />
+            <input type="submit" name="butdata" value="Добавить профиль" />
         </p>
 
     </fieldset>
 
 }
+

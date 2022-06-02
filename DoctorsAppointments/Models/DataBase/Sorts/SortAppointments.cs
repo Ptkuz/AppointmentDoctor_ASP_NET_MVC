@@ -8,6 +8,8 @@
         PatientPatronymicDesc,
         PatientLastNameAsc,
         PatientLastNameDesc,
+        PatientPolisAsc,
+        PatientPolisDesc,
         DoctorFirstNameAsc,
         DoctorFirstNameDesc,
         DoctorPatronymicAsc,

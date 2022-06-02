@@ -1,46 +1,65 @@
-﻿@using DoctorsAppointments.Models.DataBase
-@model Doctor
+﻿@using DoctorsAppointments.Models.ViewModels
+@model IndexViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewBag.Title = "Добавление доктора";
 
 
 }
+
 @using(Html.BeginForm())
 {
-    <fieldset>
-        <legend>Доктор</legend>
+    <form>
         <p>
-            Имя доктора <br/>
-            @Html.EditorFor(model => model.FirstName)     
+           <label asp-for="User.Email"></label><br/>
+           <input type="text" asp-for="User.Email"/>
+           <span asp-validation-for="User.Email"/>
         </p>
         <p>
-            Отчество доктора <br/>
-            @Html.EditorFor(model => model.Patronymic)     
+           <label asp-for="User.Password"></label><br/>
+           <input type="password" asp-for="User.Password"/>
+           <span asp-validation-for="User.Password"/>
         </p>
         <p>
-            Фамилия доктора <br/>
-            @Html.EditorFor(model => model.LastName)     
+           <label asp-for="Doctor.FirstName"></label><br/>
+           <input type="text" asp-for="Doctor.FirstName"/>
+           <span asp-validation-for="Doctor.FirstName"/>
         </p>
         <p>
-            Дата рождения доктора: <br/>
-            <input type="date" id="DateAge" name="DateAge"/>
+           <label asp-for="Doctor.Patronymic"></label><br/>
+           <input type="text" asp-for="Doctor.Patronymic"/>
+           <span asp-validation-for="Doctor.Patronymic"/>
         </p>
         <p>
-            Серия и номер паспорта <br/>
-            @Html.EditorFor(model => model.Passport)     
+           <label asp-for="Doctor.LastName"></label><br/>
+           <input type="text" asp-for="Doctor.LastName"/>
+           <span asp-validation-for="Doctor.LastName"/>     
         </p>
         <p>
-            Профиль <br/>
-            @Html.DropDownListFor(model => model.ProfileId, ViewBag.Profiles as SelectList)   
+           <label asp-for="Doctor.DateAge"></label><br/>
+           <input type="date" asp-for="Doctor.DateAge"/>
+           <span asp-validation-for="Doctor.DateAge"/>  
         </p>
         <p>
-            Стаж <br/>
-            @Html.EditorFor(model => model.Experience)     
+            <label asp-for="Doctor.Passport"></label><br/>
+           <input type="text" asp-for="Doctor.Passport"/>
+           <span asp-validation-for="Doctor.Passport"/>   
         </p>
         <p>
-            <input type="submit" value="Добавить доктора" />
+            <label asp-for="Doctor.ProfileId"></label><br/>
+            @Html.DropDownListFor(model => model.Doctor.ProfileId, ViewBag.Profiles as SelectList, "Выбрать профиль")<br/>
+            <a asp-action="CreateProfile" asp-controller="Data">Добавить профиль</a>
+        </p>
+        <p>
+            <label asp-for="Doctor.Experience"></label><br/>
+           <input type="text" asp-for="Doctor.Experience"/>
+           <span asp-validation-for="Doctor.Experience"/>  
+        </p>
+        <p>
+            <input type="submit" name="butdata" value="Добавить доктора" />
         </p>
 
-    </fieldset>
+    </form>
 
 }
+

@@ -2,39 +2,49 @@
 @model Doctor
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+
+
 <h2>Редактирование доктора</h2>
 <form asp-action="EditDoctor" asp-controller="Data" asp-route-id="@Model.Id">
     <p>
-        <label asp-for="FirstName">Имя</label>
+        <label asp-for="FirstName">Имя</label><br/>
         <input type="text" asp-for="FirstName"/>
+        <span asp-validation-for="FirstName"/>
     </p>
     <p>
-        <label asp-for="Patronymic">Отчество</label>
+        <label asp-for="Patronymic">Отчество</label><br/>
         <input type="text" asp-for="Patronymic"/>
+        <span asp-validation-for="Patronymic"/>
     </p>
     <p>
-        <label asp-for="LastName">Фамилия</label>
+        <label asp-for="LastName">Фамилия</label><br/>
         <input type="text" asp-for="LastName"/>
+        <span asp-validation-for="LastName"/>
     </p>
      <p>
-        <label asp-for="DateAge">Дата рождения</label>
+        <label asp-for="DateAge">Дата рождения</label><br/>
         <input type="date" asp-for="DateAge"/>
+        <span asp-validation-for="DateAge"/>
     </p>
     <p>
-        <label asp-for="Passport">Серия и номер паспорта</label>
+        <label asp-for="Passport">Серия и номер паспорта</label><br/>
         <input type="text" asp-for="Passport"/>
+        <span asp-validation-for="Passport"/>
     </p>
     <p>
-        Профиль <br/>
+        <label asp-for="ProfileId">Профиль</label><br/>
         @Html.DropDownListFor(model => model.ProfileId, ViewBag.Profiles as SelectList) 
+        <span asp-validation-for="ProfileId"/>
     </p>
      <p>
-        <label asp-for="Experience">Опыт</label>
+        <label asp-for="Experience">Опыт</label><br/>
         <input type="number" asp-for="Experience"/>
+        <span asp-validation-for="Experience"/>
     </p>
     <p>
-        <input type="submit" value="Изменить" />
+        <input type="submit" name="butdata" value="Изменить" />
     </p>
 
 
 </form>
+

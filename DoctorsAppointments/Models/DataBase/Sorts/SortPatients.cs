@@ -12,5 +12,11 @@
         DateAgeDesc,
         GenderAsc,
         GenderDesc,
+        PassportAsc,
+        PassportDesc,
+        PolisAsc,
+        PolisDesc,
+        SnilsAsc,
+        SnilsDesc
     }
 }

@@ -8,77 +8,89 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DoctorsAppointments
 build_property.RootNamespace = DoctorsAppointments
-build_property.ProjectDir = D:\DoctorsAppointments\DoctorsAppointments\DoctorsAppointments\
+build_property.ProjectDir = C:\Users\ptkuz\source\repos\DoctorsAppointments\DoctorsAppointments\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\DoctorsAppointments\DoctorsAppointments\DoctorsAppointments
+build_property.MSBuildProjectDirectory = C:\Users\ptkuz\source\repos\DoctorsAppointments\DoctorsAppointments
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Areas/Admin/Views/Home/Index.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Areas/Admin/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Areas/Admin/Views/Shared/_Layout.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Areas/Admin/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Areas/Admin/Views/_ViewStart.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Areas/Admin/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/Data/CreateAppointment.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Data/CreateAppointment.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGF0YVxDcmVhdGVBcHBvaW50bWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/Data/CreateDoctor.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Data/CreateDoctor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGF0YVxDcmVhdGVEb2N0b3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/Data/CreatePatient.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Data/CreatePatient.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGF0YVxDcmVhdGVQYXRpZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/Data/CreateProfile.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Data/CreateProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGF0YVxDcmVhdGVQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/Data/EditDoctor.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Data/EditDoctor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGF0YVxFZGl0RG9jdG9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/Data/EditPatient.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Data/EditPatient.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGF0YVxFZGl0UGF0aWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/Data/EditProfile.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Data/EditProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGF0YVxFZGl0UHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/Home/Index.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Data/UserCreateAppointment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGF0YVxVc2VyQ3JlYXRlQXBwb2ludG1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/Home/ViewAppointments.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Home/ViewAppointments.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxWaWV3QXBwb2ludG1lbnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/Home/ViewDoctors.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Home/ViewDoctors.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxWaWV3RG9jdG9ycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/Home/ViewPatients.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Home/ViewPatients.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxWaWV3UGF0aWVudHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/Home/ViewProfiles.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Home/ViewProfiles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxWaWV3UHJvZmlsZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/Shared/_Layout.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoctorsAppointments/DoctorsAppointments/DoctorsAppointments/Views/_ViewStart.cshtml]
+[C:/Users/ptkuz/source/repos/DoctorsAppointments/DoctorsAppointments/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

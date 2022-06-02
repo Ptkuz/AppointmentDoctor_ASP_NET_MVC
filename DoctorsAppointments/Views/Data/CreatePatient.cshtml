@@ -1,50 +1,76 @@
-﻿@using DoctorsAppointments.Models.DataBase
-@model Patient
+﻿@using DoctorsAppointments.Models.ViewModels
+@using System.Web.Mvc.Html
+@using DoctorsAppointments
+@using System.ComponentModel.DataAnnotations;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IndexViewModel
 @{
     ViewBag.Title = "Добавление пациента";
 
 
 }
+
+
 @using(Html.BeginForm())
 {
     <fieldset>
         <legend>Пациент</legend>
+
         <p>
-            Имя пациента <br/>
-            @Html.EditorFor(model => model.FirstName)     
+           <label asp-for="User.Email"></label><br/>
+           <input type="text" asp-for="User.Email"/>
+           <span asp-validation-for="User.Email"/>
         </p>
         <p>
-            Отчество пациента <br/>
-            @Html.EditorFor(model => model.Patronymic)     
+           <label asp-for="User.Password"></label><br/>
+           <input type="password" asp-for="User.Password"/>
+           <span asp-validation-for="User.Password"/>
         </p>
         <p>
-            Фамилия пациента <br/>
-            @Html.EditorFor(model => model.LastName)     
-        </p>
-       <p>
-            Дата рождения пациента: <br/>
-            <input type="date" id="DateAge" name="DateAge"/>
+            <label asp-for="Patient.FirstName"></label><br/>
+           <input type="text" asp-for="Patient.FirstName"/>
+           <span asp-validation-for="Patient.FirstName"/>
         </p>
         <p>
-            Пол пациента <br/>
-            @Html.DropDownListFor(model => model.Gender, ViewBag.Genders as SelectList)    
+            <label asp-for="Patient.Patronymic"></label><br/>
+           <input type="text" asp-for="Patient.Patronymic"/>
+           <span asp-validation-for="Patient.Patronymic"/>
         </p>
         <p>
-            Серия номер паспорта <br/>
-            @Html.EditorFor(model => model.Passport)     
+            <label asp-for="Patient.LastName"></label><br/>
+           <input type="text" asp-for="Patient.LastName"/>
+           <span asp-validation-for="Patient.LastName"/>     
+        </p>
+       <p> 
+           <label asp-for="Patient.DateAge"></label><br/>
+           <input type="date" asp-for="Patient.DateAge"/>
+           <span asp-validation-for="Patient.DateAge"/>  
         </p>
         <p>
-            Полис <br/>
-            @Html.EditorFor(model => model.Polis)     
+            <label asp-for="Patient.Genders"></label><br/>
+            @Html.DropDownListFor(model => model.Patient.Genders, ViewBag.Genders as SelectList)
+             <span asp-validation-for="Patient.Genders"/>  
         </p>
         <p>
-            Снилс <br/>
-            @Html.EditorFor(model => model.Snils)     
+            <label asp-for="Patient.Passport"></label><br/>
+           <input type="text" asp-for="Patient.Passport"/>
+           <span asp-validation-for="Patient.Passport"/>   
         </p>
         <p>
-            <input type="submit" value="Добавить пациента" />
+            <label asp-for="Patient.Polis"></label><br/>
+           <input type="text" asp-for="Patient.Polis"/>
+           <span asp-validation-for="Patient.Polis"/> 
+        </p>
+        <p>
+             <label asp-for="Patient.Snils"></label><br/>
+           <input type="text" asp-for="Patient.Snils"/>
+           <span asp-validation-for="Patient.Snils"/>    
+        </p>
+        <p>
+            <input type="submit" name="butdata" value="Добавить пациента" />
         </p>
 
     </fieldset>
 
 }
+

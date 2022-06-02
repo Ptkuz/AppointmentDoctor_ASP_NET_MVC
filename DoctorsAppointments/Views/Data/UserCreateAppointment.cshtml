@@ -1,0 +1,39 @@
+﻿@using DoctorsAppointments.Models.DataBase
+@using System.Web.Mvc.Html
+@using DoctorsAppointments
+@using System.ComponentModel.DataAnnotations
+@using DoctorsAppointments.Models.ViewModels
+@model Appointment
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewBag.Title = "Запись к врачу";
+
+
+}
+
+
+
+@using(Html.BeginForm())
+{
+    <fieldset>
+        <legend>Записаться к врачу</legend>
+        <p>
+           <label asp-for="DateAppointment"></label><br/>
+           <input type="date" asp-for="DateAppointment"/>
+           <span asp-validation-for="DateAppointment"/> 
+        </p>
+        <p>
+
+           @Html.DropDownList("TimeAppointment","Выбрать время")
+           <span asp-validation-for="TimeAppointment"  />
+        </p>
+        <p>
+            <input type="submit" name="butdata" value="Записаться на прием" />
+        </p>
+
+    </fieldset>
+
+    @Html.Raw(TempData["msg"])
+
+}
+

@@ -1,0 +1,168 @@
+﻿body {
+    background-color: #E0FFFF;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex: 0 0 auto;
+
+}
+
+header {
+    background: #AFEEEE;
+    border-radius: 0 0 30px 30px;
+}
+
+input {
+    padding: 10px;
+    border: 0;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+select {
+    padding: 10px;
+    border: 0;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+    input[name="delete"] {
+        background-color: crimson; 
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+    }
+
+    input[name="search"] {
+        background-color: gold; 
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+    }
+
+    input[name="butdata"] {
+        background-color: forestgreen;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+    }
+
+
+.wrapper-dropdown {
+    /* размер и позиционирование */
+    position: relative;
+    width: 200px;
+    padding: 10px;
+    margin: 0 auto;
+    /*Общие стили */
+    background: #9bc7de;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    /* Настройки шрифтов */
+    font-weight: bold;
+}
+
+.rounded-input {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.field-validation-error {
+    color: #b94a48;
+}
+
+input.input-validation-error {
+    border: 2px solid #b94a48;
+}
+
+input.valid {
+    border: 2px solid #16a085;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+
+
+
+div.divlogin {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -125px 0 0 -125px;
+}
+h1 {
+    color: #111;
+    font-family: ‘Helvetica Neue’, sans-serif;
+    font-size: 100px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+}
+
+h2 {
+    color: #111;
+    font-family: ‘Open Sans’, sans-serif;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 32px;
+    margin: 0 0 72px;
+    text-align: center;
+}
+
+p {
+    color: dodgerblue;
+    font-family: ‘Helvetica Neue’, sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0 0 24px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+a {
+    display: contents;
+    width: auto;
+    margin: auto;
+    padding: 9px 17px;
+    background: #E0FFFF;
+    color: blue !important;
+    text-decoration: none;
+    font-size: 17px;
+    text-align: center;
+    border: 2px solid #c5baba;
+    border-radius: 34px;
+}
+
+    a:hover {
+        color: brown !important;
+        text-decoration: none !important;
+        background: #38cc3a;
+    }

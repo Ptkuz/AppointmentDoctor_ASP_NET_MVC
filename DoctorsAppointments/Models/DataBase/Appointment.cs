@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DoctorsAppointments;
 
 namespace DoctorsAppointments.Models.DataBase
 {
@@ -39,13 +40,33 @@ namespace DoctorsAppointments.Models.DataBase
     public class Appointment
     {
         public Guid Id { get; set; }
+
+
+        [Required (ErrorMessage = "Не выбран пациент")]
+        [Display(Name = "Пациент")]
         public Guid PatientId { get; set; }
         public Patient? Patient { get; set; }
+
+
+
+        [Required (ErrorMessage = "Не выбран врач")]
+        [Display(Name = "Врач")]
         public Guid DoctorId { get; set; }
         public Doctor? Doctor { get; set; }
 
+
+        [Required (ErrorMessage ="Не выбрана дата приема")]
         [Column(TypeName = "date")]
+        [Display(Name = "Дата записи")]
         public DateTime DateAppointment { get; set; }
+
+
+        [Required (ErrorMessage = "Не выбрано время приема")]
+        [Display(Name = "Время записи")]
         public TimeAppointment? TimeAppointment { get; set; }
+
+
+
+
     }
 }

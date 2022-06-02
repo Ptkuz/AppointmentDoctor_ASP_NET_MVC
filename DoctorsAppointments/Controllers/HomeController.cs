@@ -3,34 +3,63 @@ using Microsoft.EntityFrameworkCore;
 using DoctorsAppointments.Models;
 using DoctorsAppointments.Models.DataBase;
 using DoctorsAppointments.Models.DataBase.Sorts;
+using DoctorsAppointments.Models.ViewModels;
+using DoctorsAppointments.Models.ViewModels.SortsViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DoctorsAppointments.Controllers
 {
     public class HomeController : Controller
     {
         ApplicationContext db;
+        IQueryable<Doctor>? doctors = null;
+        IQueryable<Patient>? patients = null;
+        IQueryable<Profile>? profiles = null;
+        IQueryable<Appointment>? appointments = null;
+
 
         public HomeController(ApplicationContext context)
         {
             db = context;
         }
-        public async Task<IActionResult> Index() => View();
+
+        [HttpGet]
+        //[Authorize(Roles = "admin, patient")]
+        public async Task<IActionResult> Index(Guid id) 
+        {
+            id = AccountController.idUser;
 
 
-        public async Task<IActionResult> ViewDoctors(string name, Guid profile, int page = 1, SortDoctors sortOrder = SortDoctors.ProfileNameAsc)
+            Patient? patient = await db.Patients.FirstOrDefaultAsync(p => p.UserKey == id);
+            Doctor? doctor = await db.Doctors.FirstOrDefaultAsync(p => p.UserKey == id);
+            User? user = await db.Users.FirstOrDefaultAsync(u=>u.Id == id && (u.RoleId == 1 || u.RoleId == 2 || u.RoleId == 3));
+            doctors = db.Doctors.Include(d => d.Profile).OrderBy(p=>p.Profile.Name);
+            IndexViewModel viewModel = null;
+
+           //if(user != null)
+                viewModel = new IndexViewModel(patient, doctor, user, doctors);
+            
+
+            return View(viewModel);
+        
+        }
+
+
+        [Authorize(Roles = "admin, patient")]
+        public async Task<IActionResult> ViewDoctors(string name, int profile, int page = 1, SortDoctors sortOrder = SortDoctors.ProfileNameAsc)
         {
             int pageSize = 5;
 
             // Фильтрация
-            IQueryable<Doctor> doctors = db.Doctors.Include(d => d.Profile);
-            if (profile != Guid.Empty)
+            doctors = db.Doctors.Include(d => d.Profile);
+           
+            if (profile != 0)
                 doctors = doctors.Where(p=>p.ProfileId == profile);
             if (!string.IsNullOrEmpty(name))
             {
 
-                    doctors = doctors.Where(p => (name.Contains(p.FirstName!) | name.Contains(p.Patronymic!) | name.Contains(p.LastName!)) ||
-                                                    (name.Contains(p.FirstName!) && name.Contains(p.Patronymic!) && name.Contains(p.LastName!)));
-                
+                Extensions.Filter(name, ref doctors, ref patients, ref appointments);
+
             }
             
 
@@ -55,9 +84,10 @@ namespace DoctorsAppointments.Controllers
             var items = await doctors.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
             var sort = new SortDoctorsViewModel(sortOrder);
             var filter = new FilterViewModel(db.Profiles.ToList(), profile, name);
+            var user = await db.Users.FirstOrDefaultAsync(u => u.Id == AccountController.idUser);
 
             PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel(items, pageViewModel, sort, filter);
+            IndexViewModel viewModel = new IndexViewModel(items, pageViewModel, sort, filter, user);
 
 
            
@@ -65,39 +95,131 @@ namespace DoctorsAppointments.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> ViewPatients(int page = 1)
+        [Authorize(Roles = "admin, doctor")]
+        public async Task<IActionResult> ViewPatients(string name, int page = 1, SortPatients sortOrder = SortPatients.GenderAsc)
         {
             int pageSize = 5;
-            IQueryable<Patient> source = db.Patients;
-            var count = await source.CountAsync();
-            var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            patients = db.Patients;
+
+            if (!string.IsNullOrEmpty(name)) 
+            {
+                Extensions.Filter(name, ref doctors, ref patients, ref appointments);
+            }
+
+            patients = sortOrder switch 
+            {
+                SortPatients.FirstNameAsc => patients.OrderBy(n=>n.FirstName),
+                SortPatients.FirstNameDesc => patients.OrderByDescending(n=>n.FirstName),
+                SortPatients.PatronymicAsc => patients.OrderBy(n=>n.Patronymic),
+                SortPatients.PatronymicDesc => patients.OrderByDescending(n=>n.Patronymic),
+                SortPatients.LastNameAsc => patients.OrderBy(n=>n.LastName),
+                SortPatients.LastNameDesc => patients.OrderByDescending(n=>n.LastName),
+                SortPatients.DateAgeAsc => patients.OrderBy(n=>n.DateAge),
+                SortPatients.DateAgeDesc => patients.OrderByDescending(n=>n.DateAge),
+                SortPatients.GenderDesc => patients.OrderByDescending(n=>n.Genders),
+                SortPatients.PassportAsc => patients.OrderBy(n=>n.Passport),
+                SortPatients.PassportDesc => patients.OrderByDescending(n=>n.Passport),
+                SortPatients.PolisAsc => patients.OrderBy(n=>n.Polis),
+                SortPatients.PolisDesc => patients.OrderByDescending(n=>n.Polis),
+                SortPatients.SnilsAsc => patients.OrderBy(n=>n.Snils),
+                SortPatients.SnilsDesc => patients.OrderByDescending(n=>n.Snils),
+                _=>patients.OrderBy(n=>n.Genders)
+            };
+
+            var count = await patients.CountAsync();
+            var items = await patients.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            var sort = new SortPatientsViewModel(sortOrder);
+            var filter = new FilterViewModel(name);
+            var user = await db.Users.FirstOrDefaultAsync(u => u.Id == AccountController.idUser);
 
             PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel(items, pageViewModel);
+            IndexViewModel viewModel = new IndexViewModel(items, pageViewModel, sort, filter, user);
+
+            return View(viewModel);
+
+        }
+
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> ViewProfiles(int page = 1, SortProfiles sortOrder = SortProfiles.NameAsc)
+        {
+            int pageSize = 5;
+            profiles = db.Profiles;
+
+            profiles = sortOrder switch
+            {
+                SortProfiles.NameDesc => profiles.OrderByDescending(n => n.Name),
+                _ => profiles.OrderBy(n => n.Name)
+            };
+
+            var count = await profiles.CountAsync();
+            var items = await profiles.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            var sort = new SortProfilesViewModel(sortOrder);
+            var user = await db.Users.FirstOrDefaultAsync(u => u.Id == AccountController.idUser);
+
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            IndexViewModel viewModel = new IndexViewModel(items, pageViewModel, sort, user);
             return View(viewModel);
         }
 
-        public async Task<IActionResult> ViewProfiles(int page = 1)
+
+        [Authorize(Roles = "admin, patient, doctor")]
+        public async Task<IActionResult> ViewAppointments(string name, int page = 1, SortAppointments sortOrder = SortAppointments.DateAppointmentAsc)
         {
             int pageSize = 5;
-            IQueryable<Profile> source = db.Profiles;
-            var count = await source.CountAsync();
-            var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            var patient = await db.Patients.FirstOrDefaultAsync(p => p.UserKey == AccountController.idUser);
+            var doctor = await db.Doctors.FirstOrDefaultAsync(d => d.UserKey == AccountController.idUser);
+            var user = await db.Users.FirstOrDefaultAsync(u => u.Id == AccountController.idUser);
+            if (patient != null)
+            {
+                appointments = db.Appointments.Include(p => p.Patient).Include(d => d.Doctor).Include(pr => pr.Doctor!.Profile).Where(a => a.PatientId == patient.Id);
+            }
+            else if (patient != null) 
+            {
+                appointments = db.Appointments.Include(p => p.Patient).Include(d => d.Doctor).Include(pr => pr.Doctor!.Profile).Where(a => a.DoctorId == doctor.Id);
+            }
+            else
+                appointments = db.Appointments.Include(p => p.Patient).Include(d => d.Doctor).Include(pr => pr.Doctor.Profile);
+
+            if (!string.IsNullOrEmpty(name)) 
+            {
+                Extensions.Filter(name, ref doctors, ref patients, ref appointments);
+            }
+
+            appointments = sortOrder switch 
+            {
+                SortAppointments.PatientFirstNameAsc => appointments.OrderBy(n=>n.Patient!.FirstName),
+                SortAppointments.PatientFirstNameDesc => appointments.OrderByDescending(n=>n.Patient!.FirstName),
+                SortAppointments.PatientPatronymicAsc => appointments.OrderBy(n=>n.Patient!.Patronymic),
+                SortAppointments.PatientPatronymicDesc => appointments.OrderByDescending(n=>n.Patient!.Patronymic),
+                SortAppointments.PatientLastNameAsc => appointments.OrderBy(n=>n.Patient!.LastName),
+                SortAppointments.PatientLastNameDesc => appointments.OrderByDescending(n=>n.Patient!.LastName),
+                SortAppointments.PatientPolisAsc => appointments.OrderBy(n=>n.Patient!.Polis),
+                SortAppointments.PatientPolisDesc => appointments.OrderByDescending(n=>n.Patient!.Polis),
+                SortAppointments.DoctorFirstNameAsc => appointments.OrderBy(n => n.Doctor!.FirstName),
+                SortAppointments.DoctorFirstNameDesc => appointments.OrderByDescending(n => n.Doctor!.FirstName),
+                SortAppointments.DoctorPatronymicAsc => appointments.OrderBy(n => n.Doctor!.Patronymic),
+                SortAppointments.DoctorPatronymicDesc => appointments.OrderByDescending(n => n.Doctor!.Patronymic),
+                SortAppointments.DoctorLastNameAsc => appointments.OrderBy(n => n.Doctor!.LastName),
+                SortAppointments.DoctorLastNameDesc => appointments.OrderByDescending(n => n.Doctor!.LastName),
+                SortAppointments.DoctorProfileNameAsc => appointments.OrderBy(n=>n.Doctor!.Profile!.Name),
+                SortAppointments.DoctorProfileNameDesc => appointments.OrderByDescending(n=>n.Doctor!.Profile!.Name),
+                SortAppointments.DateAppointmentDesc => appointments.OrderByDescending(n=>n.DateAppointment),
+                _ => appointments.OrderBy(n => n.DateAppointment)
+
+
+
+            };
+
+            var count = await appointments.CountAsync();
+            var items = await appointments.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            var sort = new SortAppointmentsViewModel(sortOrder);
+            var filter = new FilterViewModel(name);
+            
 
             PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel(items, pageViewModel);
-            return View(viewModel);
-        }
+            IndexViewModel viewModel = new IndexViewModel(items, pageViewModel, sort, filter, user);
 
-        public async Task<IActionResult> ViewAppointments(int page = 1)
-        {
-            int pageSize = 5;
-            IQueryable<Appointment> source = db.Appointments.Include(p=>p.Patient).Include(d=>d.Doctor).Include(pr=>pr.Doctor.Profile);
-            var count = await source.CountAsync();
-            var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
-
-            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel(items, pageViewModel);
             return View(viewModel);
         }
 

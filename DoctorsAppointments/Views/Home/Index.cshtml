@@ -1,7 +1,69 @@
-﻿@{
+﻿@using DoctorsAppointments.Models.ViewModels
+@using DoctorsAppointments.Models.DataBase
+@model IndexViewModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
     ViewBag.Title = "Главная страница";
 }
 
+<div>
+    
+        @{if(Model?.User?.RoleId == 3){
 
+            <p>Добро пожаловать, пациент @Model.Patient.FirstName @Model.Patient.Patronymic @Model.Patient.LastName</p>
+            <a asp-action="ViewDoctors" asp-controller="Home">Список докторов</a>
+            <a asp-action="ViewAppointments" asp-controller="Home" asp-route-id="@Model.Patient.Id">Просмотр записей</a>
+            <a asp-action="EditPatient" asp-controller="Data" asp-route-id="@Model.Patient.Id">Изменить свои данные</a>
+            <a asp-action="Logout" asp-controller="Account">Выйти</a>                     
+        }
+        else if (Model?.User?.RoleId == 2)
+        {
+                <p>Добро пожаловать, доктор @Model.Doctor.FirstName @Model.Doctor.Patronymic @Model.Doctor.LastName</p>
+                <a asp-action="ViewPatients" asp-controller="Home">Список пациентов</a>
+                <a asp-action="ViewAppointments" asp-controller="Home" asp-route-id="@Model.Doctor.Id">Просмотр записей</a>
+                <a asp-action="EditDoctor" asp-controller="Data" asp-route-id="@Model.Doctor.Id">Изменить свои данные</a>
+                <a asp-action="Logout" asp-controller="Account">Выйти</a>
+            }
+
+        else if (Model?.User?.RoleId == 1)
+        {
+            <p>Добро пожаловать, администратор @Model.User.Email</p>
+             <a href="/admin">Панель администратора</a>
+            <a asp-action="Logout" asp-controller="Account">Выйти</a>        
+        }
+
+    
+    else 
+    {
+        <div class="login">
+        <a asp-action="Login" asp-controller="Account" asp>Войти</a>
+        <a asp-action="Register" asp-controller="Account">Зарегистрироваться</a>
+        </div>
+    }
+    }
+   
+    
+    
+    
+    
+</div>
 
 <h3>На данном сайте вы можете записываться на прием к врачу в нашей полеклинике. Для записи вам необходимо авторизироваться</h3>
+<h3>Наши специалисты: </h3>
+
+<table class="table">
+
+    
+        @foreach (var doctor in Model?.Doctors)
+        {
+            <tr>
+            <td>@doctor.LastName</td>
+             <td>@doctor.FirstName</td>
+              <td>@doctor.Patronymic</td>
+              <td>@doctor.Profile.Name</td>
+               </tr>
+        }
+   
+</table>

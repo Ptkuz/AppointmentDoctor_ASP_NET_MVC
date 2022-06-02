@@ -1,4 +1,7 @@
 ﻿@using DoctorsAppointments.Models.DataBase
+@using System.Web.Mvc.Html
+@using DoctorsAppointments
+@using System.ComponentModel.DataAnnotations;
 @model Appointment
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
@@ -6,46 +9,55 @@
 
 
 }
+
+<style>
+.field-validation-error {
+    color: #b94a48;
+}
+  
+input.input-validation-error {
+    border: 2px solid #b94a48;
+}
+input.valid {
+    border: 2px solid #16a085;
+}
+ 
+.validation-summary-errors {
+    color: #b94a48;
+}
+</style>
+
 @using(Html.BeginForm())
 {
     <fieldset>
         <legend>Запись на прием к врачу</legend>
         <p>
-            Пациент <br/>
-            @Html.DropDownListFor(model => model.PatientId, ViewBag.Patients as SelectList)    
+            <label asp-for="PatientId"></label><br />
+            @Html.DropDownListFor(model => model.PatientId, ViewBag.Patients as SelectList, "Выбрать пациента")  
+            <span asp-validation-for="PatientId"  />
         </p>
        <p>
-            Доктор <br/>
-            @Html.DropDownListFor(model => model.DoctorId, ViewBag.Doctors as SelectList)    
+            <label asp-for="DoctorId"></label><br />
+            @Html.DropDownListFor(model => model.DoctorId, ViewBag.Doctors as SelectList, "Выбрать врача")    
+            <span asp-validation-for="DoctorId"  />
         </p>
         
         <p>
-            Дата: <br/>
-            <input type="date" id="DateAppointment" name="DateAppointment"/>
+           <label asp-for="DateAppointment"></label><br/>
+           <input type="date" asp-for="DateAppointment"/>
+           <span asp-validation-for="DateAppointment"/> 
         </p>
         <p>
-            Время: <br/>
-           <select data-val="true" data-val-required="The TimeAppointment field is required." id="TimeAppointment" name="TimeAppointment">
-	            <option selected="selected" value="0">10:00</option>
-	            <option value="1">10:30</option>
-	            <option value="2">11:00</option>
-	            <option value="3">11:30</option>
-	            <option value="4">12:00</option>
-	            <option value="5">12:30</option>
-	            <option value="6">13:00</option>
-	            <option value="7">13:30</option>
-	            <option value="8">14:00</option>
-	            <option value="9">14:30</option>
-                <option value="10">15:00</option>
-                <option value="11">15:30</option>
-                <option value="12">16:00</option>
-                <option value="13">16:30</option>
-</select>
+
+           @Html.DropDownList("TimeAppointment","Выбрать время")
+           <span asp-validation-for="TimeAppointment"  />
         </p>
         <p>
-            <input type="submit" value="Записаться на прием" />
+            <input type="submit" name="butdata" value="Записаться на прием" />
         </p>
 
     </fieldset>
+
+    @Html.Raw(TempData["msg"])
 
 }
