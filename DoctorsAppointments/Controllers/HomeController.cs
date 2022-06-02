@@ -174,7 +174,7 @@ namespace DoctorsAppointments.Controllers
             {
                 appointments = db.Appointments.Include(p => p.Patient).Include(d => d.Doctor).Include(pr => pr.Doctor!.Profile).Where(a => a.PatientId == patient.Id);
             }
-            else if (patient != null) 
+            else if (doctor != null) 
             {
                 appointments = db.Appointments.Include(p => p.Patient).Include(d => d.Doctor).Include(pr => pr.Doctor!.Profile).Where(a => a.DoctorId == doctor.Id);
             }
